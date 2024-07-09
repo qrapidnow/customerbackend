@@ -1,8 +1,7 @@
 const Order = require('../models/order.model');
 
 const saveOrder = async (req, res) => {
-  const { name, whatsapp, cartItems } = req.body;
-  const { restaurantId } = req.params; // Get restaurantId from request params
+  const { name, whatsapp, cartItems, restaurantId } = req.body; // Get restaurantId from request body
 
   console.log('Request received:', { name, whatsapp, cartItems, restaurantId });
 
