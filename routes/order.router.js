@@ -3,6 +3,6 @@ const router = express.Router();
 const { saveOrder } = require('../controllers/orderController');
 
 // Route to save order
-router.post('/', saveOrder);
+router.post('/orders', saveOrder);
 
 module.exports = router;
