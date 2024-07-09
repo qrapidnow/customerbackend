@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const orderRoute = require('./routes/orders');
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -16,9 +17,10 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .catch(err => console.log(err));
 
 // Routes
-app.use(orderRoute);
+app.use('/api', orderRoute);  // Ensure the route is prefixed with /api
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-s
+
+module.exports = app; // Export the app for Vercel's serverless function handling
