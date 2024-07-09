@@ -16,9 +16,19 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('MongoDB connection error:', err));
 
+// Default route for testing
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
 
 // Routes
-app.use(orderRoute);  // Ensure the route is prefixed with /api
+app.use(orderRoute);  // Use routes without /api prefix
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
