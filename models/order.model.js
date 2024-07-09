@@ -11,6 +11,7 @@ const OrderSchema = new Schema({
       quantity: { type: Number, required: true },
     }
   ],
+  restaurantId: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant', required: true }, // Add this line
   createdAt: { type: Date, default: Date.now }
 });
 

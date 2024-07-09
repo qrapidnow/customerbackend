@@ -2,7 +2,9 @@ const Order = require('../models/order.model');
 
 const saveOrder = async (req, res) => {
   const { name, whatsapp, cartItems } = req.body;
-  console.log('Request received:', { name, whatsapp, cartItems });
+  const { restaurantId } = req.params; // Get restaurantId from request params
+
+  console.log('Request received:', { name, whatsapp, cartItems, restaurantId });
 
   try {
     const sanitizedCartItems = cartItems.map(item => ({
@@ -17,6 +19,7 @@ const saveOrder = async (req, res) => {
       name,
       whatsapp,
       cartItems: sanitizedCartItems,
+      restaurantId, // Add restaurantId to the order
     });
 
     console.log('Saving new order:', newOrder);
