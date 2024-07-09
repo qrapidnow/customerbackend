@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -9,7 +8,12 @@ const orderRoute = require('./routes/order.router');
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+// Setup CORS
+app.use(cors({
+  origin: 'https://frontend1-sand.vercel.app', // Allow your frontend URL
+  optionsSuccessStatus: 200
+}));
+
 app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGO_URI, { 
@@ -20,7 +24,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log('MongoDB connection error:', err));
 
-app.use(orderRoute);  // Adjusted route prefix
+app.use('/api', orderRoute); // Adjusted route prefix
 
 app.get('/', (req, res) => {
   res.send('Hello World');
