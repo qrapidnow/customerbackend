@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-app.use('/api', orderRoute); // Ensure correct base path
+app.use(orderRoute); // Ensure correct base path
 
 app.get('/', (req, res) => {
   res.send('Hello World');
