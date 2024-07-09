@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -14,27 +15,24 @@ app.use(bodyParser.json());
 mongoose.connect(process.env.MONGO_URI, { 
   useNewUrlParser: true, 
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000, // Adjust timeout as necessary
+  serverSelectionTimeoutMS: 5000
 })
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log('MongoDB connection error:', err));
 
-// Default route for testing
+app.use(orderRoute);  // Adjusted route prefix
+
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-// Routes
-app.use(orderRoute);  // Use routes without /api prefix
-
-// Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+  console.error('Server error:', err);
+  res.status(500).send('Server error occurred');
 });
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-module.exports = app; // Export the app for Vercel's serverless function handling
+module.exports = app;
