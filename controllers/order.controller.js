@@ -1,16 +1,13 @@
-// order.controller.js
 const Order = require('../models/order.model');
 
 const saveOrder = async (req, res) => {
-  const { name, whatsapp, items, totalPrice, restaurantId } = req.body;
+  const { name, whatsapp, items } = req.body;
 
   try {
     const newOrder = new Order({
       name,
       whatsapp,
-      items,
-      totalPrice,
-      restaurantId
+      items
     });
 
     const savedOrder = await newOrder.save();
