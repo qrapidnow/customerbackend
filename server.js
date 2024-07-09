@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log('MongoDB connection error:', err));
 
-app.use('/api', orderRoute); // Adjusted route prefix
+app.use(orderRoute); // Adjusted route prefix
 
 app.get('/', (req, res) => {
   res.send('Hello World');
