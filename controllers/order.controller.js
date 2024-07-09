@@ -1,10 +1,9 @@
-const Order = require('../models/Order');
+const Order = require('../models/order.model');
 
 const saveOrder = async (req, res) => {
   const { name, whatsapp, cartItems } = req.body;
 
   try {
-    // Exclude image from cartItems
     const sanitizedCartItems = cartItems.map(item => ({
       name: item.name,
       price: item.price,
