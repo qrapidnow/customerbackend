@@ -3,6 +3,8 @@ const Order = require('../models/order.model');
 const saveOrder = async (req, res) => {
   const { name, whatsapp, items } = req.body;
 
+  console.log('Received order data:', req.body);
+
   try {
     const newOrder = new Order({
       name,
@@ -11,6 +13,7 @@ const saveOrder = async (req, res) => {
     });
 
     const savedOrder = await newOrder.save();
+    console.log('Order saved to database:', savedOrder);
     res.status(201).json(savedOrder);
   } catch (error) {
     console.error('Error saving order:', error);
